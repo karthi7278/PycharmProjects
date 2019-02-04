@@ -1,0 +1,12 @@
+import json, urllib.request
+rm="http://quickstart.cloudera:8088/cluster/apps/RUNNING"
+threshold=36
+with urllib.request.urlopen(rm) as response:
+	data=json.loads(response.read().decode('utf8'))
+print ("Below applications are running for more than 1 hour. Kindly look into it")
+for running_apps in data['apps']['app']:
+    if running_apps['elapsedTime']>threshold:
+        print ("\nApp Name: {}".format(running_apps['name']))
+        print ("Application id: {}".format(running_apps['id']))
+        print ("Total elapsed time: {} hours".format(round(running_apps['elapsedTime']/1000/60/60)))
+        print ("Tracking Url: ",running_apps['trackingUrl'])
