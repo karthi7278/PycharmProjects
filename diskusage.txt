@@ -1,0 +1,6 @@
+#!bin/sh
+server=`hostname -f`
+hi="Hi Team,\n\nBelow are the disk usage details for the log file" 
+sign="Regards,\nHadoop Admin Team"
+path=` du -Ssh /hadoop/var/log/* -t 1M | sort -rh` 
+echo -e "$hi\n$path\n$sign" | mailx -s "Disk Usage on the server $server" rkantha@express-scripts.com
