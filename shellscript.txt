@@ -1,0 +1,3 @@
+#!bin/sh
+server=`hostname -f`
+find /var/log -type f -name '*.log' -mtime +90 -exec rm -f {} \; | mailx -s "list of log files deleted" tejas@gmail.com
